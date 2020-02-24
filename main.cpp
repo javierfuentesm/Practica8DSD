@@ -1,19 +1,27 @@
-//g++ -std=c++11  E1.cpp -o E1 -lpthread
 #include <iostream>
 #include <unistd.h>
 #include <thread>
 using namespace std;
+int valor = 0;
 
-void funcion(int valor) {
-    printf("Hilo %ld Valor recibido: %d\n", this_thread::get_id(), valor);
-    sleep(2);
+void disminuye() {
+    valor -= 1;
+    printf("Hilo %ld ejecutando disminucion(). Valor: %d\n", this_thread::get_id(), valor);
+    sleep(1);
+}
+
+void aumenta() {
+    valor += 1;
+    printf("Hilo %ld ejecutando aumento(). Valor: %d\n", this_thread::get_id(), valor);
+    sleep(1);
 }
 
 int main() {
-    thread th1(funcion, 5), th2(funcion, 10);
-    printf("Proceso principal espera que los hilos terminen\n");//
+    thread th1(aumenta), th2(disminuye);
+    printf("Proceso principal espera que los hilos terminen\n");
     th1.join();
     th2.join();
-    printf("El hilo principal termina\n");//
+    printf("El hilo principal termina\n");
+    printf("VALOR: %d\n", valor);
     exit(0);
 }
