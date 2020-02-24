@@ -5,15 +5,19 @@ using namespace std;
 int valor = 0;
 
 void disminuye() {
-    valor -= 1;
-    printf("Hilo %ld ejecutando disminucion(). Valor: %d\n", this_thread::get_id(), valor);
-    sleep(1);
+    for (int i = 0; i < 100000; i++) {
+        valor -= 1;
+        //printf("Hilo %ld ejecutando disminucion(). Valor: %d\n", this_thread::get_id(), valor);
+        //sleep(1);
+    }
 }
 
 void aumenta() {
-    valor += 1;
-    printf("Hilo %ld ejecutando aumento(). Valor: %d\n", this_thread::get_id(), valor);
-    sleep(1);
+    for (int i = 0; i < 100000; i++) {
+        valor += 1;
+        //printf("Hilo %ld ejecutando aumento(). Valor: %d\n", this_thread::get_id(), valor);
+        //sleep(1);
+    }
 }
 
 int main() {
